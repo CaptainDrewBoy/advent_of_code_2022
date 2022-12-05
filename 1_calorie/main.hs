@@ -1,3 +1,4 @@
+import Data.List
 import System.IO
 
 main = do
@@ -6,7 +7,9 @@ main = do
   putStrLn $ highest contents
   hClose handle
 
-highest file = show $ maximum $ chunksum (lines file)
+highest = show . maximum . chunksum . lines
+
+highest_three = show . sum . take 3 . reverse . sort . chunksum . lines
 
 -- Takes a list, then takes elems until it reaches an empty str, THEN it sums those and adds that to a new list
 chunksum [] = []
